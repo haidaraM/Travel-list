@@ -10,6 +10,7 @@
     card_view:cardElevation="@dimen/card_elevation">
 
     <ImageView
+
         android:id="@+id/placeImage"
         android:layout_width="match_parent"
         android:layout_height="200dp"
