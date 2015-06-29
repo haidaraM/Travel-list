@@ -9,6 +9,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
+
             android:id="@+id/placeImage"
             android:layout_width="match_parent"
             android:layout_height="220dp"
@@ -57,6 +58,7 @@
         </LinearLayout>
 
         <ImageButton
+            android:alpha="0.0"
             android:id="@+id/btn_add"
             android:layout_width="@dimen/floating_button_size"
             android:layout_height="@dimen/floating_button_size"

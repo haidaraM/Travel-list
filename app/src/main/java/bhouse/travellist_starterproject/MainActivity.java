@@ -3,12 +3,17 @@ package bhouse.travellist_starterproject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
@@ -38,10 +43,20 @@ public class MainActivity extends Activity {
         TravelListAdapter.OnItemClickListener onItemClickListener = new TravelListAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(MainActivity.this,"Clicked : "+position,Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(MainActivity.this,DetailActivity.class);
                 intent.putExtra(DetailActivity.EXTRA_PARAM_ID,position);
-                startActivity(intent);
+
+                // 1
+                ImageView placeImage = (ImageView) view.findViewById(R.id.placeImage);
+                LinearLayout placeNameHolder = (LinearLayout) view.findViewById(R.id.placeNameHolder);
+// 2
+                Pair<View, String> imagePair = Pair.create((View) placeImage, "tImage");
+                Pair<View, String> holderPair = Pair.create((View) placeNameHolder, "tNameHolder");
+// 3
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this,
+                        imagePair, holderPair);
+                ActivityCompat.startActivity(MainActivity.this, intent, options.toBundle());
             }
         };
 
