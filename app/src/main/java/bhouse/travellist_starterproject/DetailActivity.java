@@ -72,6 +72,8 @@ public class DetailActivity extends Activity implements View.OnClickListener {
         loadPlace();
         windowTransition();
         getPhoto();
+
+
     }
 
     private void setUpAdapter() {
@@ -112,7 +114,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
     private void applyPalette(Palette mPalette) {
         getWindow().setBackgroundDrawable(new ColorDrawable(mPalette.getDarkMutedColor(defaultColor)));
         mTitleHolder.setBackgroundColor(mPalette.getMutedColor(defaultColor));
-
+        getWindow().setStatusBarColor(mPalette.getMutedColor(defaultColor));
         mRevealView.setBackgroundColor(getColorWithAlpha(mPalette.getLightVibrantColor(defaultColor),0.75f));
 
     }
