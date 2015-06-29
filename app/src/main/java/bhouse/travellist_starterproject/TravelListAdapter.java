@@ -1,6 +1,9 @@
 package bhouse.travellist_starterproject;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,10 +34,19 @@ public class TravelListAdapter extends RecyclerView.Adapter<TravelListAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(TravelListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final TravelListAdapter.ViewHolder holder, int position) {
         final Place place = new PlaceData().placeList().get(position);
         holder.placeName.setText(place.name);
         Picasso.with(context).load(place.getImageResourceId(context)).into(holder.placeImage);
+
+        Bitmap photo = BitmapFactory.decodeResource(context.getResources(), place.getImageResourceId(context));
+
+        Palette.generateAsync(photo, new Palette.PaletteAsyncListener() {
+            public void onGenerated(Palette palette) {
+                int bgColor = palette.getMutedColor(context.getResources().getColor(android.R.color.black));
+                holder.placeNameHolder.setBackgroundColor(bgColor);
+            }
+        });
     }
 
     @Override
