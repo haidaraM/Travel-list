@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 
 public class MainActivity extends Activity {
@@ -25,6 +26,7 @@ public class MainActivity extends Activity {
     private RecyclerView mRecyclerView;
     private StaggeredGridLayoutManager mStaggeredLayoutManager;
     private TravelListAdapter mAdapter;
+    private Toolbar toolbar;
 
 
     @Override
@@ -61,10 +63,17 @@ public class MainActivity extends Activity {
         };
 
         mAdapter.setOnItemClickListener(onItemClickListener);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setUpActionBar();
     }
 
     private void setUpActionBar() {
-
+        if (toolbar != null) {
+            setActionBar(toolbar);
+            getActionBar().setDisplayHomeAsUpEnabled(false);
+            getActionBar().setDisplayShowTitleEnabled(true);
+            getActionBar().setElevation(7);
+        }
     }
 
     @Override
