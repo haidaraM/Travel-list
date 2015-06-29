@@ -7,6 +7,8 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
@@ -16,6 +18,7 @@ public class MainActivity extends Activity {
 
     private RecyclerView mRecyclerView;
     private StaggeredGridLayoutManager mStaggeredLayoutManager;
+    private TravelListAdapter mAdapter;
 
 
     @Override
@@ -24,6 +27,21 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         isListView = true;
+        mRecyclerView = (RecyclerView) findViewById(R.id.list);
+        mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
+
+        mAdapter = new TravelListAdapter(this);
+        mRecyclerView.setAdapter(mAdapter);
+
+        TravelListAdapter.OnItemClickListener onItemClickListener = new TravelListAdapter.OnItemClickListener(){
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(MainActivity.this,"Clicked : "+position,Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        mAdapter.setOnItemClickListener(onItemClickListener);
     }
 
     private void setUpActionBar() {
@@ -55,10 +73,12 @@ public class MainActivity extends Activity {
             item.setIcon(R.drawable.ic_action_list);
             item.setTitle("Show as list");
             isListView = false;
+            mStaggeredLayoutManager.setSpanCount(2);
         } else {
             item.setIcon(R.drawable.ic_action_grid);
             item.setTitle("Show as grid");
             isListView = true;
+            mStaggeredLayoutManager.setSpanCount(1);
         }
     }
 }
