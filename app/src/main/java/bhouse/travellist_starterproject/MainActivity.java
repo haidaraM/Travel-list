@@ -63,8 +63,8 @@ public class MainActivity extends Activity {
         };
 
         mAdapter.setOnItemClickListener(onItemClickListener);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setUpActionBar();
+       /* toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setUpActionBar();*/
     }
 
     private void setUpActionBar() {
